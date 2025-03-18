@@ -29,6 +29,22 @@ def create_issue():
         }), 201
 
 # Get all issues
+@issues_bp.route('/', methods=['GET'])
+def get_issues():
+    issues = Issue.query.all()
+    issues_list = [{
+        'id': issue.id,
+        'title': issue.title,
+        'description': issue.description,
+        'user_id': issue.user_id,
+        'location': issue.location,
+        'created_at': issue.created_at
+    } for issue in issues]
+    
+    return jsonify(issues_list), 200
+
+
+# Get all issues
 @issues_bp.route('/<int:issue_id>', methods=['GET'])
 def get_issue(issue_id):
     issue = Issue.query.get_or_404(issue_id)

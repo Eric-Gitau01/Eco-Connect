@@ -4,7 +4,6 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 # from flask_jwt_extended import JWTManager
 from app.models import db, init_models
-# from app.routes.protected import protected_bp
 from config import config
 import pymysql
 import logging
@@ -21,7 +20,7 @@ migrate = Migrate()
 
 def create_app(config_name):
     """Factory function to create and configure the Flask app."""
-    app = Flask(__name__)
+    app = Flask(__name__, static_folder='static')
     app.config.from_object(config[config_name])
     # jwt = JWTManager(app)
 
@@ -42,13 +41,16 @@ def create_app(config_name):
     from app.routes.issues import issues_bp
     from app.routes.comments import comments_bp
     from app.routes.search import search_bp
-    from app.routes.users import users_bp
+    from app.routes.home import home_bp
+    
+#from app.routes.users import users_bp
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(issues_bp, url_prefix='/api/issues')
     app.register_blueprint(comments_bp, url_prefix='/api/comments')
     app.register_blueprint(search_bp, url_prefix='/api/search')
-    app.register_blueprint(users_bp, url_prefix='/api/users')
+    app.register_blueprint(home_bp)
+#app.register_blueprint(users_bp, url_prefix='/api/users')
     # app.register_blueprint(protected_bp, url_prefix='/api')
 
     #  set up logging
