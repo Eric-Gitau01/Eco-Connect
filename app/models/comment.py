@@ -8,7 +8,7 @@ class Comment(db.Model):
     content = db.Column(db.Text, nullable=False)
     issue_id = db.Column(db.Integer, db.ForeignKey('issue.id', ondelete='CASCADE'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(datetime.timezone.utc), nullable=False)
 
     # relationships
     issue = db.relationship('Issue', back_populates='comments')

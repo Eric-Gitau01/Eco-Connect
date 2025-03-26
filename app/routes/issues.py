@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from app.models.issue import Issue
 from app.models import db
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
 issues_bp = Blueprint('issues', __name__)
 
@@ -8,12 +9,14 @@ issues_bp = Blueprint('issues', __name__)
 
 # Create a new issue
 @issues_bp.route('/', methods=['POST'])
+@jwt_required()
 def create_issue():
+    user_id = get_jwt_identity()
     data = request.get_json()
     new_issue = Issue(
         title=data.get('title'),
         description=data.get('description'),
-        user_id=data.get('user_id'),
+        user_id=user_id,
         location=data.get('location')
     )
     db.session.add(new_issue)

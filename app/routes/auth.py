@@ -1,10 +1,10 @@
-from flask import Blueprint, request, jsonify, current_app, abort
+from flask import Blueprint, request, jsonify, current_app
 import jwt
 from datetime import datetime, timedelta
 from app.models import db
 from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
-#from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 import uuid
 
 
@@ -41,28 +41,6 @@ def register():
 
     return jsonify({'message': 'User created successfully'}), 201
 
-# # User registration
-# @auth_bp.route('/register', methods=['POST'])
-# def register():
-#     data = request.get_json()
-#     username = data.get('username')
-#     password = data.get('password')
-#     email = data.get('email')
-
-#     if not username or not password:
-#         return jsonify({'message': 'Username and password are required'}), 400
-
-#     if User.query.filter_by(username=username).first():
-#         return jsonify({'message': 'User already exists'}), 400
-
-#     # Store hashed password in the database
-#     hashed_password = generate_password_hash(password)
-#     new_user = User(username=username, email=email, password=hashed_password)
-#     db.session.add(new_user)
-#     db.session.commit()
-
-#     return jsonify({'message': 'User created successfully'}), 201
-
 
 # User login
 @auth_bp.route('/login', methods=['POST'])
@@ -79,7 +57,7 @@ def login():
         # access_token = create_access_token(identity=str(user.id))
         # refresh_token = create_refresh_token(identity=str(user.id))
         access_token = jwt.encode(
-             {'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=1)},
+             {'user_id': user.id, 'exp': datetime.now(datetime.timezone.utc) + timedelta(hours=3)},
              current_app.config['SECRET_KEY'],
              algorithm='HS256')
 
@@ -126,7 +104,7 @@ def refresh_token():
         
         # Generate new access token
         access_token = jwt.encode(
-            {'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=1)},
+            {'user_id': user.id, 'exp': datetime.now(datetime.timezone.utc) + timedelta(hours=3)},
             current_app.config['SECRET_KEY'],
             algorithm='HS256'
         )
@@ -144,75 +122,4 @@ def refresh_token():
     except Exception as e:
         print(f"Error during refresh token: {e}")
         return jsonify({'message': 'An  Internal Server Error occurred'}), 500
-    
 
-
-    # data = request.get_json()
-    # refresh_token = data.get('refresh_token')
-
-    # user = User.query.filter_by(refresh_token=refresh_token).first()
-    # if not user:
-    #     return jsonify({'message': 'Invalid refresh token'}), 401
-
-    # access_token = jwt.encode(
-    #     {'user_id': user.id, 'exp': datetime.utcnow() + timedelta(hours=1)},
-    #     current_app.config['SECRET_KEY'],
-    #     algorithm='HS256'
-    # )
-
-    # return jsonify({'access_token': access_token}), 200
-
-
-# # Request password reset
-# @auth_bp.route('/request-password-reset', methods=['POST'])
-# def request_password_reset():
-#     data = request.get_json()
-#     email = data.get('email')
-
-#     user = User.query.filter_by(email=email).first()
-#     if not user:
-#         return jsonify({'message': 'Email not found'}), 404
-
-#     reset_token = jwt.encode(
-#         {'user_id': user.id, 'exp': datetime.utcnow() + timedelta(minutes=15)},
-#         current_app.config['SECRET_KEY'],
-#         algorithm='HS256'
-#     )
-
-#     print(f"Password reset link: http://localhost:5000/api/auth/reset-password/{reset_token}")
-
-#     return jsonify({'message': 'Password reset link sent to your email'})
-
-
-# # Reset password
-# @auth_bp.route('/reset-password/<token>', methods=['POST'])
-# def reset_password(token):
-#     try:
-#         data = jwt.decode(token, current_app.config['SECRET_KEY'], algorithms=['HS256'])
-#         user = User.query.get(data['user_id'])
-
-#         if not user:
-#             return jsonify({'message': 'Invalid token'}), 401
-
-#         new_password= request.get_json().get('password')
-#         user.set_password(new_password)
-#         db.session.commit()
-
-#         return jsonify({'message': 'Password has been reset successfully'})
-
-#     except jwt.ExpiredSignatureError:
-#         return jsonify({'message': 'Token has expired'}), 401
-#     except jwt.InvalidTokenError:
-#         return jsonify({'message': 'Invalid token'}), 401
-
-# def test_register_user(self):
-#     """Test user registration with password."""
-#     response = self.client.post('/api/auth/register', json={
-#         'username': 'newuser',
-#         'password': 'password123'
-#     })
-#     data = response.get_json()
-
-#     self.assertEqual(response.status_code, 201)
-#     self.assertEqual(data['message'], 'User created successfully')
-#     self.assertIsNotNone(User.query.filter_by(username='newuser').first())

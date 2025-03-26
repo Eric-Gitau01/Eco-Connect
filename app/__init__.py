@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_cors import CORS
-# from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager
 from app.models import db, init_models
 from config import config
 import pymysql
@@ -22,7 +22,9 @@ def create_app(config_name):
     """Factory function to create and configure the Flask app."""
     app = Flask(__name__, static_folder='static')
     app.config.from_object(config[config_name])
-    # jwt = JWTManager(app)
+
+    # Initialize JWT manager
+    jwt = JWTManager(app)
 
     # Enable CORS for handling cross-origin requests
     CORS(app)
