@@ -1,6 +1,6 @@
 # Eco-Connect
 # Introduction
-Eco-Connect is a community focused platform designed to connect you with your neighbours in the pursuit of a clean and sustainable environment. Together, we can identify opportunities for improvement and recognize the positive environmental practices already in place. Eco-Connect fosters a sense of shared responsibility, ensuring a healthy and thriving environment for everyone.
+Eco-Connect is a community focused platform designed to connect people with their neighbours in the pursuit of a clean and sustainable environment. Together, they can identify opportunities for improvement and recognize the positive environmental practices already in place. Eco-Connect fosters a sense of shared responsibility, ensuring a healthy and thriving environment for everyone.
 
 # Features
 Community Engagement: Connect with neighbours to promote sustainability.
