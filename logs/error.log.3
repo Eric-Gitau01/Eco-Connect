@@ -1,4 +1,4 @@
-2025-03-24 17:08:52,144 ERROR: Exception on /api/auth/login [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
+2025-03-24 17:14:07,434 ERROR: Exception on /api/auth/login [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/base.py", line 146, in __init__
     self._dbapi_connection = engine.raw_connection()
@@ -132,4 +132,4 @@ Traceback (most recent call last):
     raise errorclass(errno, errval)
 sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1045, "Access denied for user 'eco_admin'@'localhost' (using password: YES)")
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
-2025-03-24 17:08:52,247 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/auth/login - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:93]
+2025-03-24 17:14:07,442 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/auth/login - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:93]

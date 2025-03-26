@@ -24,9 +24,9 @@ class IssuesTestCase(unittest.TestCase):
             # Sample issue data
             self.new_issue = {
                 'title': 'Test Issue',
+                'location': 'Kirinyaga County',
                 'description': 'This is a test issue',
-                'user_id': self.test_user_id,
-                'location': 'Kirinyaga County'
+                'user_id': self.test_user_id
             }
 
 
@@ -43,8 +43,9 @@ class IssuesTestCase(unittest.TestCase):
         self.assertEqual(response.status_code, 201)
         self.assertIn('Issue created successfully', data['message'])
         self.assertEqual(data['Issue']['title'], self.new_issue['title'])
-        self.assertEqual(data['Issue']['description'], self.new_issue['description'])
         self.assertEqual(data['Issue']['location'], self.new_issue['location'])
+        self.assertEqual(data['Issue']['description'], self.new_issue['description'])
+    
 
     # Test fetching an issue
     def test_get_issue(self):
@@ -68,8 +69,9 @@ class IssuesTestCase(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(data['id'], issue.id)
             self.assertEqual(data['title'], self.new_issue['title'])
-            self.assertEqual(data['description'], self.new_issue['description'])
             self.assertEqual(data['location'], self.new_issue['location'])
+            self.assertEqual(data['description'], self.new_issue['description'])
+            
 
 
     # Test updating an issue
@@ -89,8 +91,9 @@ class IssuesTestCase(unittest.TestCase):
             # Update the issue
             updated_data = {
                 'title': 'Updated Title',
-                'description': 'Updated description',
-                'location': 'Updated location'
+                'location': 'Updated location',
+                'description': 'Updated description'
+                
                 }
             
             # send the update request

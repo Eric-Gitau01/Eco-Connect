@@ -1,5 +1,5 @@
 from app.models import db
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 class Issue(db.Model):
     __tablename__ = 'issue'
@@ -7,8 +7,8 @@ class Issue(db.Model):
     # Columns
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
-    description = db.Column(db.Text, nullable=False)
     location = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(datetime.timezone.utc), nullable=False)
 
@@ -19,8 +19,8 @@ class Issue(db.Model):
     # Methods
     def __init__(self, title, description, location, user_id):
         self.title = title
-        self.description = description
         self.location = location
+        self.description = description
         self.user_id = user_id
 
     def to_dict(self):
@@ -28,8 +28,8 @@ class Issue(db.Model):
         return {
             "id": self.id,
             "title": self.title,
-            "description": self.description,
             "location": self.location,
+            "description": self.description,
             "user_id": self.user_id,
             "created_at": self.created_at.isoformat(),
             "comments": [comment.to_dict() for comment in self.comments] if self.comments else []

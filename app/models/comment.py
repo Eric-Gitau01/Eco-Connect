@@ -1,5 +1,5 @@
 from app.models import db
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 class Comment(db.Model):
     __tablename__ = 'comment'

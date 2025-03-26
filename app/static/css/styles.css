@@ -2,8 +2,11 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f4;
+    background-image: url('/static/eco-connect5.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
     margin: 0px;
     padding: 0px;
     text-align: justify;

@@ -1,4 +1,4 @@
-2025-03-15 15:46:30,899 ERROR: Exception on /api/comments/ [POST] [in /home/gachuuri/Eco-Connect/venv/lib/python3.10/site-packages/flask/app.py:875]
+2025-03-15 15:51:00,205 ERROR: Exception on /api/comments/ [POST] [in /home/gachuuri/Eco-Connect/venv/lib/python3.10/site-packages/flask/app.py:875]
 Traceback (most recent call last):
   File "/home/gachuuri/Eco-Connect/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
     self.dialect.do_execute(
@@ -101,6 +101,6 @@ Traceback (most recent call last):
     raise errorclass(errno, errval)
 sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1452, 'Cannot add or update a child row: a foreign key constraint fails (`eco_connect`.`comment`, CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`issue_id`) REFERENCES `issue` (`id`) ON DELETE CASCADE)')
 [SQL: INSERT INTO comment (content, issue_id, user_id, created_at) VALUES (%(content)s, %(issue_id)s, %(user_id)s, %(created_at)s)]
-[parameters: {'content': 'This needs urgent action!', 'issue_id': 1, 'user_id': 1, 'created_at': datetime.datetime(2025, 3, 15, 12, 46, 30, 804266)}]
+[parameters: {'content': 'This needs urgent action!', 'issue_id': 1, 'user_id': 1, 'created_at': datetime.datetime(2025, 3, 15, 12, 51, 0, 134155)}]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
-2025-03-15 15:46:30,900 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/comments/ - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Eco-Connect/app/__init__.py:89]
+2025-03-15 15:51:00,214 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/comments/ - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Eco-Connect/app/__init__.py:89]

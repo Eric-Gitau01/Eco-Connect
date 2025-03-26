@@ -9,6 +9,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <style>
+        body {
+            background-image: url('/static/eco-connect5.jpg');
+        }
+    </style>
 
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-success"> 
@@ -17,59 +22,37 @@
         <button class="btn btn-light" onclick="window.location.href='login.html'">Login</button>
     </div>
 </nav>
-
-<!-- feature section-->
-<section class="container">
+<!-- Search Button-->
+<div class="text-center my-4">
+    <button class="btn btn-secondary" onclick="window.location.href='search.html'">Search for an Issue...</button>
+</div>
+<!-- Reported Issues-->
+ <div class="container">
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="display-12">Report an Issue</h2>
-            <p>Report any environmental issues in your community
-                and help us keep our environment clean and safe.
-            </p>
-        <div class="col-lg-12">
+            <h2 class="display-12">Reported Issues</h2>
+            <p>Here are some of the latest environmental issues reported by our users:</p>
+            <p><b>Deforestation Threats in Karura Forest: A Call for Conservation</b></p>
+            <p>Karura Forest, Nairobi, Kenya</p>
+            <br>
+            <p>Karura Forest, one of Nairobi’s largest urban green spaces,
+                faces growing deforestation risks from illegal logging, urban encroachment,
+                and land-use changes. Despite its protected status, unauthorized activities threaten
+                its biodiversity, water catchment role, and recreational value. The forest’s
+                1,041 hectares host endangered species and serve as a critical carbon sink.
+                Community-led conservation efforts, alongside strict enforcement,
+                are vital to curb habitat loss. Sustainable urban planning and public
+                awareness can help preserve this ecological treasure.
+                Immediate action is needed to balance development with environmental protection.</p>
+            <br>
+            <P>Reported by: SHREK </P>
+        </div>
     </div>
-</section>
 
 <!-- Report Issue Button -->
 <div class="text-center my-4">
-    <button class="btn btn-primary" onclick="window.location.href='report_issue.html'">Report an Issue</button>
+    <button class="btn btn-secondary" onclick="window.location.href='report_issue.html'">Report an Issue</button>
 </div>
-
-<!-- About Eco-Connect-->
-<section class="container">
-        <div class="col-lg-12">
-            <h2 class="display-12">About Eco-Connect</h2>
-            <p>Eco-Connect is a community-focused platform designed to connect you
-                with your neighbours in the pursuit of a clean and sustainable environment.
-                Together, we can identify opportunities for improvement and recognize
-                the positive environmental practices already in place. Eco-Connect fosters
-                a sense of shared responsibility, ensuring a healthy and thriving
-                environment for everyone.
-            </p>
-            <div class="full-image">
-                <img src="https://i.pinimg.com/736x/04/85/87/048587680b9914b10b3b56a2d2fe1e4d.jpg" alt="https://i.pinimg.com/736x/87/c1/3e/87c13e6ec4ee6f7de8d59c1500859d9e.jpg">
-            </div>
-            <h4 class="display-12">Our Mission</h4>
-            <p>To create a sustainable environment by connecting communities
-                and fostering a sense of shared responsibility.
-            </p>
-            <h4 class="display-12">Our Vision</h4>
-            <p>To create a world where every community is committed to
-                environmental stewardship and sustainability.
-            </p>
-            <h4 class="display-12">Meet The Team</h4>
-            <p> Our team is dedicated to creating a sustainable environment for all.
-                Get to know us better by visiting our profiles on LinkedIn and Github.
-            </p>
-            <a href="https://www.linkedin.com/in/fiona-gachuuri-a804562a0/"> LinkedIn</a>
-            <br>
-            <a href="https://github.com/FionaGachuuri"> Github</a>
-            <br>
-            <p>Here is the Github repository for the project: <a href="https://github.com/FionaGachuuri/Eco-Connect.git"> Project's Github Repository</a></p>
-        </div>
-    </div>
-</section>
-<br
 
 <!-- Footer -->
 <footer class="bg-success text-white text-center py-3">

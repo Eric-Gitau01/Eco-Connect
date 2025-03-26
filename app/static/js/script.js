@@ -5,7 +5,7 @@ function loadIssues() {
     fetch(`${API_URL}/issues`)
         .then(response => {
             if (!response.ok) {
-                throw new Error("HTTP error !! " + response.status);
+                throw new Error("HTTP error ! Status: " + response.status);
         }
         return response.json();
     })
@@ -45,16 +45,20 @@ $("#reportForm").on("submit", function(event) {
     const title = $("#issueTitle").val();
     const location = $("#issueLocation").val();
     const description = $("#issueDescription").val();
+    const token = localStorage.getItem("token");
 
     fetch(`${API_URL}/issues`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer 'Bearer YOUR_ACCESS_TOKEN'`
+        },
         body: JSON.stringify({ title, location, description })
     })
     .then(response => response.json())
     .then(data => {
-        alert("Issue reported successfully!");
-        window.location.href = "index.html";
+        alert("Issue created successfully!");
+        window.location.href = "report_issue.html";
     })
     .catch(error => console.error("Error reporting issue:", error));
 });
@@ -96,17 +100,23 @@ $("#loginForm").on("submit", function(event) {
     const username = $("#username").val();
     const password = $("#password").val();
 
+    console.log("Sending login request:", { username,password });
+
     fetch(`${API_URL}/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password })
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log("Response status:", response.status);
+        return response.json();
+    })
     .then(data => {
+        console.log("Login response:", data);
         if (data.access_token) {
             localStorage.setItem("token", data.access_token);
             alert("Login successful!");
-            window.location.href = "index.html";
+            window.location.href = "login.html";
         } else {
             alert("Invalid credentials. Please try again.");
         }

@@ -9,10 +9,22 @@ issues_bp = Blueprint('issues', __name__)
 
 # Create a new issue
 @issues_bp.route('/', methods=['POST'])
+@issues_bp.route('', methods=['POST'])
 @jwt_required()
 def create_issue():
     user_id = get_jwt_identity()
     data = request.get_json()
+
+
+    # Ensure data is present
+    if not data:
+        return jsonify({'error:' 'Missing JSON data'}), 400
+    
+    required_fields = ['title', 'location','description']
+    missing_fields = [field for field in required_fields if field not in data]
+    if missing_fields:
+        return jsonify({'error': f'Missing fields: {", ".join(missing_fields)}'}), 400
+   
     new_issue = Issue(
         title=data.get('title'),
         description=data.get('description'),
@@ -38,9 +50,9 @@ def get_issues():
     issues_list = [{
         'id': issue.id,
         'title': issue.title,
+        'location': issue.location,
         'description': issue.description,
         'user_id': issue.user_id,
-        'location': issue.location,
         'created_at': issue.created_at
     } for issue in issues]
     
@@ -54,9 +66,9 @@ def get_issue(issue_id):
     return jsonify({
         'id': issue.id,
         'title': issue.title,
+        'location': issue.location,
         'description': issue.description,
         'user_id': issue.user_id,
-        'location': issue.location,
         'created_at': issue.created_at
     })
 
@@ -66,8 +78,8 @@ def update_issue(issue_id):
     data = request.get_json()
     issue = Issue.query.get_or_404(issue_id)
     issue.title = data.get('title', issue.title)
-    issue.description = data.get('description', issue.description)
     issue.location = data.get('location', issue.location)
+    issue.description = data.get('description', issue.description)
     db.session.commit()
     return jsonify({'message': 'Issue updated successfully'})
 
