@@ -1,29 +1,9 @@
-2025-03-24 17:20:51,984 ERROR: Exception on /api/issues/ [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
-Traceback (most recent call last):
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-    self.dialect.do_execute(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-    cursor.execute(statement, parameters)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
-    result = self._query(query)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
-    conn.query(q)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/connections.py", line 563, in query
-    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/connections.py", line 825, in _read_query_result
-    result.read()
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/connections.py", line 1199, in read
-    first_packet = self.connection._read_packet()
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/connections.py", line 775, in _read_packet
-    packet.raise_for_error()
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/protocol.py", line 219, in raise_for_error
-    err.raise_mysql_exception(self._data)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
-    raise errorclass(errno, errval)
-pymysql.err.IntegrityError: (1048, "Column 'user_id' cannot be null")
-
-The above exception was the direct cause of the following exception:
-
+2025-03-26 11:56:23,573 ERROR: 404 Error: http://127.0.0.1:5000/favicon.ico [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-26 12:20:41,761 ERROR: 404 Error: http://127.0.0.1:5000/search.html [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-26 12:25:13,512 ERROR: 404 Error: http://127.0.0.1:5000/search.html [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-26 12:34:05,131 ERROR: 404 Error: http://127.0.0.1:5000/search.html [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-26 12:34:19,055 ERROR: 404 Error: http://127.0.0.1:5000/search.html [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-26 13:00:42,166 ERROR: Exception on / [GET] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
 Traceback (most recent call last):
   File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
     response = self.full_dispatch_request()
@@ -35,76 +15,31 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "/home/gachuuri/Building/Eco-Connect/app/routes/issues.py", line 20, in create_issue
-    db.session.commit()
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/scoping.py", line 597, in commit
-    return self._proxied.commit()
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 2028, in commit
-    trans.commit(_to_root=True)
-  File "<string>", line 2, in commit
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
-    ret_value = fn(self, *arg, **kw)
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1313, in commit
-    self._prepare_impl()
-  File "<string>", line 2, in _prepare_impl
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
-    ret_value = fn(self, *arg, **kw)
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 1288, in _prepare_impl
-    self.session.flush()
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4352, in flush
-    self._flush(objects)
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4487, in _flush
-    with util.safe_reraise():
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/session.py", line 4448, in _flush
-    flush_context.execute()
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
-    rec.execute(self)
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
-    util.preloaded.orm_persistence.save_obj(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
-    _emit_insert_statements(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
-    result = connection.execute(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/base.py", line 1418, in execute
-    return meth(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
-    return connection._execute_clauseelement(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
-    return self._exec_single_context(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
-    self._handle_dbapi_exception(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
-    self.dialect.do_execute(
-  File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/default.py", line 941, in do_execute
-    cursor.execute(statement, parameters)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/cursors.py", line 153, in execute
-    result = self._query(query)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/cursors.py", line 322, in _query
-    conn.query(q)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/connections.py", line 563, in query
-    self._affected_rows = self._read_query_result(unbuffered=unbuffered)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/connections.py", line 825, in _read_query_result
-    result.read()
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/connections.py", line 1199, in read
-    first_packet = self.connection._read_packet()
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/connections.py", line 775, in _read_packet
-    packet.raise_for_error()
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/protocol.py", line 219, in raise_for_error
-    err.raise_mysql_exception(self._data)
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/pymysql/err.py", line 150, in raise_mysql_exception
-    raise errorclass(errno, errval)
-sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1048, "Column 'user_id' cannot be null")
-[SQL: INSERT INTO issue (title, description, location, user_id, created_at) VALUES (%(title)s, %(description)s, %(location)s, %(user_id)s, %(created_at)s)]
-[parameters: {'title': 'Pollution in Nairobi River', 'description': 'Factory waste being dumped', 'location': 'Nairobi River', 'user_id': None, 'created_at': datetime.datetime(2025, 3, 24, 14, 20, 51, 983239)}]
-(Background on this error at: https://sqlalche.me/e/20/gkpj)
-2025-03-24 17:20:51,986 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/issues/ - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:93]
-2025-03-24 17:38:42,317 ERROR: Exception on /api/issues/ [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
+  File "/home/gachuuri/Building/Eco-Connect/app/routes/home.py", line 7, in home
+    return render_template('landingpage.html')
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/templating.py", line 149, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/jinja2/environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/jinja2/environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/jinja2/loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/jinja2/environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/jinja2/environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/home/gachuuri/Building/Eco-Connect/app/templates/landingpage.html", line 34, in template
+    <img src="{{ url_for('static', screenshots/eco-login.png') }}" alt="Feature 1" class="img-fluid">
+jinja2.exceptions.TemplateSyntaxError: expected token ',', got 'string'
+2025-03-26 13:00:42,238 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/ - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:95]
+2025-03-26 15:24:22,139 ERROR: 404 Error: http://127.0.0.1:5000/search.html [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-26 16:41:51,955 ERROR: 404 Error: http://127.0.0.1:5000/search.html [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-26 16:43:05,690 ERROR: 404 Error: http://127.0.0.1:5000/register.html [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-26 16:43:14,455 ERROR: 404 Error: http://127.0.0.1:5000/register.html [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-26 17:18:14,814 ERROR: Exception on /api/auth/login [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
 Traceback (most recent call last):
   File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
     response = self.full_dispatch_request()
@@ -116,15 +51,44 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/view_decorators.py", line 167, in decorator
-    verify_jwt_in_request(
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/view_decorators.py", line 94, in verify_jwt_in_request
-    jwt_data, jwt_header, jwt_location = _decode_jwt_from_request(
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/view_decorators.py", line 310, in _decode_jwt_from_request
-    locations = config.token_location
-  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/config.py", line 44, in token_location
-    locations = current_app.config["JWT_TOKEN_LOCATION"]
-KeyError: 'JWT_TOKEN_LOCATION'
-2025-03-24 17:38:42,654 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/issues/ - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:93]
-2025-03-24 17:39:23,987 ERROR: 404 Error: http://127.0.0.1:5000/api/auth/me [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:88]
-2025-03-24 17:40:32,648 ERROR: 404 Error: http://127.0.0.1:5000/favicon.ico [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:88]
+  File "/home/gachuuri/Building/Eco-Connect/app/routes/auth.py", line 60, in login
+    {'user_id': user.id, 'exp': datetime.now(datetime.timezone.utc) + timedelta(hours=3)},
+AttributeError: type object 'datetime.datetime' has no attribute 'timezone'
+2025-03-26 17:18:14,860 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/auth/login - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:95]
+2025-03-28 14:47:41,144 ERROR: Exception on /api/auth/logout [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
+Traceback (most recent call last):
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+  File "/home/gachuuri/Building/Eco-Connect/app/routes/auth.py", line 92, in logout
+    current_app.config['JWT_BLACKLIST'].add(refresh_token)
+KeyError: 'JWT_BLACKLIST'
+2025-03-28 14:47:41,295 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/auth/logout - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:95]
+2025-03-28 14:48:25,915 ERROR: 404 Error: http://127.0.0.1:5000/favicon.ico [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-03-28 14:51:41,281 ERROR: Exception on /api/auth/logout [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
+Traceback (most recent call last):
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/view_decorators.py", line 170, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+  File "/home/gachuuri/Building/Eco-Connect/app/routes/auth.py", line 92, in logout
+    # Set the refresh token to the blacklist
+KeyError: 'JWT_BLACKLIST'
+2025-03-28 14:51:41,283 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/auth/logout - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:95]

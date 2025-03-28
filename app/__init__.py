@@ -41,7 +41,7 @@ def create_app(config_name):
     # Import and register blueprints (routes)
     from app.routes.auth import auth_bp
     from app.routes.issues import issues_bp
-    from app.routes.comments import comments_bp
+    # from app.routes.comments import comments_bp
     from app.routes.search import search_bp
     from app.routes.home import home_bp
     
@@ -49,7 +49,7 @@ def create_app(config_name):
 
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(issues_bp, url_prefix='/api/issues')
-    app.register_blueprint(comments_bp, url_prefix='/api/comments')
+    #app.register_blueprint(comments_bp, url_prefix='/api/comments')
     app.register_blueprint(search_bp, url_prefix='/api/search')
     app.register_blueprint(home_bp)
 #app.register_blueprint(users_bp, url_prefix='/api/users')

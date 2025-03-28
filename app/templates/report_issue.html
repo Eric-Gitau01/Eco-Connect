@@ -19,24 +19,24 @@
 <!-- Report Form -->
 <div class="container mt-4">
     <h2>Report an Environmental Issue</h2>
-    <form id="reportForm">
+    <form id="issue-form">
         <div class="mb-3">
-            <label for="issueTitle" class="form-label">Title</label>
-            <input type="text" class="form-control" id="issueTitle" required>
+            <label for="Title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="Title" required>
         </div>
         <div class="mb-3">
-            <label for="issueLocation" class="form-label">Location</label>
-            <input type="text" class="form-control" id="issueLocation" required>
+            <label for="Location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="Location" required>
         </div>
         <div class="mb-3">
-            <label for="issueDescription" class="form-label">Description</label>
-            <textarea class="form-control" id="issueDescription" rows="3" required></textarea>
+            <label for="Description" class="form-label">Description</label>
+            <textarea class="form-control" id="Description" rows="3" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit Issue</button>
     </form>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

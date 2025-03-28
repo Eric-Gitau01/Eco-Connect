@@ -1,4 +1,4 @@
-2025-03-24 17:20:21,348 ERROR: Exception on /api/issues/ [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
+2025-03-24 17:20:51,984 ERROR: Exception on /api/issues/ [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
 Traceback (most recent call last):
   File "/usr/local/lib/python3.10/dist-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
     self.dialect.do_execute(
@@ -101,6 +101,30 @@ Traceback (most recent call last):
     raise errorclass(errno, errval)
 sqlalchemy.exc.IntegrityError: (pymysql.err.IntegrityError) (1048, "Column 'user_id' cannot be null")
 [SQL: INSERT INTO issue (title, description, location, user_id, created_at) VALUES (%(title)s, %(description)s, %(location)s, %(user_id)s, %(created_at)s)]
-[parameters: {'title': 'Pollution in Nairobi River', 'description': 'Factory waste being dumped', 'location': 'Nairobi River', 'user_id': None, 'created_at': datetime.datetime(2025, 3, 24, 14, 20, 21, 343771)}]
+[parameters: {'title': 'Pollution in Nairobi River', 'description': 'Factory waste being dumped', 'location': 'Nairobi River', 'user_id': None, 'created_at': datetime.datetime(2025, 3, 24, 14, 20, 51, 983239)}]
 (Background on this error at: https://sqlalche.me/e/20/gkpj)
-2025-03-24 17:20:21,362 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/issues/ - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:93]
+2025-03-24 17:20:51,986 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/issues/ - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:93]
+2025-03-24 17:38:42,317 ERROR: Exception on /api/issues/ [POST] [in /home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py:875]
+Traceback (most recent call last):
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 1511, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 919, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_cors/extension.py", line 194, in wrapped_function
+    return cors_after_request(app.make_response(f(*args, **kwargs)))
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 917, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask/app.py", line 902, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/view_decorators.py", line 167, in decorator
+    verify_jwt_in_request(
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/view_decorators.py", line 94, in verify_jwt_in_request
+    jwt_data, jwt_header, jwt_location = _decode_jwt_from_request(
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/view_decorators.py", line 310, in _decode_jwt_from_request
+    locations = config.token_location
+  File "/home/gachuuri/.local/lib/python3.10/site-packages/flask_jwt_extended/config.py", line 44, in token_location
+    locations = current_app.config["JWT_TOKEN_LOCATION"]
+KeyError: 'JWT_TOKEN_LOCATION'
+2025-03-24 17:38:42,654 CRITICAL: 500 Internal Server Error at http://127.0.0.1:5000/api/issues/ - Error: 500 Internal Server Error: The server encountered an internal error and was unable to complete your request. Either the server is overloaded or there is an error in the application. [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:93]
+2025-03-24 17:39:23,987 ERROR: 404 Error: http://127.0.0.1:5000/api/auth/me [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:88]
+2025-03-24 17:40:32,648 ERROR: 404 Error: http://127.0.0.1:5000/favicon.ico [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:88]

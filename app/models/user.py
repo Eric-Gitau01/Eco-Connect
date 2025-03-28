@@ -9,7 +9,7 @@ class User(db.Model):
     username = db.Column(db.String(100), unique=True, nullable=False)
     email = db.Column(db.String(150), unique=True, nullable=False)
     password = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=lambda: datetime.now(datetime.timezone.utc))
+    created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
     refresh_token = db.Column(db.String(500), nullable=True)
 
     issues = db.relationship('Issue', back_populates='user', cascade='all, delete-orphan')    

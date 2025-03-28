@@ -1,10 +1,20 @@
 from flask import Blueprint, request, jsonify, current_app
 import jwt
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from app.models import db
 from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import (
+    create_access_token, 
+    create_refresh_token, 
+    jwt_required, 
+    get_jwt_identity,
+    get_jwt,
+    set_access_cookies,
+    unset_access_cookies,
+    set_refresh_cookies,
+    unset_refresh_cookies
+)
 import uuid
 
 
@@ -54,16 +64,9 @@ def login():
 
     user = User.query.filter_by(username=username).first()
     if user and check_password_hash(user.password, password):
-        # access_token = create_access_token(identity=str(user.id))
-        # refresh_token = create_refresh_token(identity=str(user.id))
-        access_token = jwt.encode(
-             {'user_id': user.id, 'exp': datetime.now(datetime.timezone.utc) + timedelta(hours=3)},
-             current_app.config['SECRET_KEY'],
-             algorithm='HS256')
-
-        refresh_token = str(uuid.uuid4()) # Generate refresh token
-        user.refresh_token = refresh_token # Save refresh token to the database
-        db.session.commit() # Commit changes to the database
+        # create access and refresh tokens
+        access_token = create_access_token(identity=str(user.id))
+        refresh_token = create_refresh_token(identity=str(user.id))
 
         return jsonify({
             'access_token': access_token,
@@ -74,52 +77,26 @@ def login():
     return jsonify({'message': 'Invalid credentials'}), 401
 
 
+
+@auth_bp.route('/logout', methods=['POST'])
+@jwt_required(refresh=True) # Require a refresh token to access this route
+def logout():
+    try:
+        user_id = get_jwt_identity()
+        current_refresh_token = get_jwt()["jti"]
+        current_app.config['JWT_BLACKLIST'].add(current_refresh_token)
+        return jsonify({'message': 'Successfully logged out'}), 200
+    except Exception as e:
+        return jsonify({'error': 'Internal Server Error', 'message': str(e)}), 500
+
+
 # Refresh access token
 @auth_bp.route('/refresh-token', methods=['POST'])
 def refresh_token():
-    try:
-        data = request.get_json()
-        if not data or 'refresh_token' not in data:
-            print("Refresh token is required")
-            return jsonify({'message': 'Refresh token is required'}), 400
-        
-        refresh_token = data.get('refresh_token')
-        print(f"Looking for user with refresh token: {refresh_token}")
+    # Get the currents user's identitym from the refresh token
+    current_user_id = get_jwt_identity()
 
-        # Find user by refresh token
-        user = User.query.all()
-        print(f"All users and their refresh tokens: {user}")
-        user = User.query.filter_by(refresh_token=refresh_token).first()
-        print(f"User found: {user}")
+    # Create a new access token
+    access_token = create_access_token(identity=curent_user_id)
 
-        if not user:
-            print("No user found with this refresh token")
-            return jsonify({'message': 'Invalid refresh token'}), 401
-        
-        # Ensure refresh token is not empty or expired
-        if not user.refresh_token:
-            print("Refresh token is empty or expired")
-            return jsonify({'message': 'Invalid refresh token'}), 401
-        
-        
-        # Generate new access token
-        access_token = jwt.encode(
-            {'user_id': user.id, 'exp': datetime.now(datetime.timezone.utc) + timedelta(hours=3)},
-            current_app.config['SECRET_KEY'],
-            algorithm='HS256'
-        )
-
-        # Generate new refresh token and save it to the database
-        new_refresh_token = str(uuid.uuid4())
-        user.refresh_token = new_refresh_token
-        db.session.commit()
-
-        # return the new token as a response
-        print(f"New access token and refresh token generated for user {user.id}")
-        return jsonify({'access_token': access_token, 'refresh_token': new_refresh_token}), 200
-        
-    
-    except Exception as e:
-        print(f"Error during refresh token: {e}")
-        return jsonify({'message': 'An  Internal Server Error occurred'}), 500
-
+    return jsonify({'access_token': access_token}), 200

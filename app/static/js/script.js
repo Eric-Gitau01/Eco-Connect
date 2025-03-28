@@ -1,125 +1,162 @@
-const API_URL = "http://127.0.0.1:5000/api";
+const API_BASE_URL = "http://127.0.0.1:5000";
 
-// Function to load issues from the backend
-function loadIssues() {
-    fetch(`${API_URL}/issues`)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("HTTP error ! Status: " + response.status);
+// Utility function to handle API requests
+async function apiRequest(endpoint, method = "GET", body = null, auth = false) {
+    const headers = { "Content-Type": "application/json" };
+    if (auth) {
+        const token = localStorage.getItem("access_token");
+        if (token) {
+            headers["Authorization"] = `Bearer ${token}`;
+        } else {
+            console.error(" No access token found in local storage!");
+            return null;
         }
-        return response.json();
-    })
-        .then(issues => {
-            console.log("Fetch issues:", issues);
-            $("#issuesContainer").html("");
-            issues.forEach(issue => {
-                $("#issuesContainer").append(`
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">${issue.title}</h5>
-                                <p><strong>Location:</strong> ${issue.location}</p>
-                                <p class="card-text">${issue.description}</p>
-                                <button class="btn btn-primary btn-sm" onclick="showCommentBox(${issue.id})">Add Comment</button>
-                                <div id="commentBox-${issue.id}" style="display: none;">
-                                    <textarea id="commentText-${issue.id}" class="form-control" rows="2" placeholder="Write a comment..."></textarea>
-                                    <button class="btn btn-success btn-sm mt-2" onclick="submitComment(${issue.id})">Submit</button>
-                                </div>
-                                <h6 class="mt-2">Comments:</h6>
-                                <ul id="comments-${issue.id}" class="list-group">
-                                    ${issue.comments.map(comment => `<li class="list-group-item">${comment.text}</li>`).join('')}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                `);
-            });
-        })
-        .catch(error => console.error("Error fetching issues:", error));
+    }
+    
+    const options = { method, headers };
+    if (body) options.body = JSON.stringify(body);
+    
+    try {
+        console.log(`📡 Request: ${method} ${API_BASE_URL}${endpoint}`);
+        console.log("Headers:", headers);
+
+        const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
+        if (response.status === 401) {
+            console.warn("Unauthorized! Redirecting to login...");
+            localStorage.removeItem("access_token");
+            window.location.href = "/login.html"; 
+            return null;
+        }
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "Request failed");
+        return data;
+    } catch (error) {
+        console.error("API Error:", error.message);
+        return null;
+    }
 }
 
-// Function to submit an issue
-$("#reportForm").on("submit", function(event) {
-    event.preventDefault();
-
-    const title = $("#issueTitle").val();
-    const location = $("#issueLocation").val();
-    const description = $("#issueDescription").val();
-    const token = localStorage.getItem("token");
-
-    fetch(`${API_URL}/issues`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer 'Bearer YOUR_ACCESS_TOKEN'`
-        },
-        body: JSON.stringify({ title, location, description })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert("Issue created successfully!");
-        window.location.href = "report_issue.html";
-    })
-    .catch(error => console.error("Error reporting issue:", error));
-});
-
-// Show the comment box for a specific issue
-function showCommentBox(issueId) {
-    $(`#commentBox-${issueId}`).toggle();
+// User Registration
+async function registerUser(username, email, password) {
+    const data = await apiRequest("/register", "POST", { username, email, password });
+    if (data) alert("Registration successful. You can now log in.");
 }
 
-// Function to submit a comment
-function submitComment(issueId) {
-    const commentText = $(`#commentText-${issueId}`).val();
-    if (!commentText) {
-        alert("Comment cannot be empty.");
+// User Login
+async function loginUser(username, password) {
+    console.log("logging in...");
+
+    const data = await apiRequest("/api/auth/login", "POST", { username, password });
+
+    if (data && data.access_token) {
+        console.log("Login successful", data);
+        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("refresh_token", data.refresh_token);
+        alert("Login successful!");
+        window.location.href = "dashboard.html";
+    } else {
+        console.error("Login failed. No token received ")
+        alert("Login failed. Please check your credentials.")
+    }
+}
+
+// Refresh Token (if expired)
+async function refreshToken() {
+    const refreshToken = localStorage.getItem("refresh_token");
+    if (!refreshToken) return;
+    
+    const data = await apiRequest("/refresh-token", "POST", {}, true);
+    if (data) localStorage.setItem("access_token", data.access_token);
+}
+
+// Create Issue
+async function createIssue(title, location, description) {
+    console.log("📡 Sending issue data:", { title, location, description });
+
+    const data = await apiRequest("/api/issues", "POST", { title, location, description }, true);
+    if (data) {
+        console.log("Issue created successfully:", data);
+        alert("Issue created successfully");
+        window.location.href = "dashboard.html";
+    } else {
+        console.error("Issue creation failed!")
+    }
+}
+
+// Fetch Issues
+async function getIssues() {
+    const issues = await apiRequest("/api/issues", "GET");
+    if (!issues || issues.length === 0) {
+        console.warn("No issues found.");
         return;
     }
 
-    fetch(`${API_URL}/comments`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ issue_id: issueId, text: commentText })
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert("Comment added successfully!");
-        loadIssues();
-    })
-    .catch(error => console.error("Error posting comment:", error));
-}
-
-// Load issues on page load
-$(document).ready(function() {
-    loadIssues();
-});
-// Login Function
-$("#loginForm").on("submit", function(event) {
-    event.preventDefault();
-
-    const username = $("#username").val();
-    const password = $("#password").val();
-
-    console.log("Sending login request:", { username,password });
-
-    fetch(`${API_URL}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password })
-    })
-    .then(response => {
-        console.log("Response status:", response.status);
-        return response.json();
-    })
-    .then(data => {
-        console.log("Login response:", data);
-        if (data.access_token) {
-            localStorage.setItem("token", data.access_token);
-            alert("Login successful!");
-            window.location.href = "login.html";
-        } else {
-            alert("Invalid credentials. Please try again.");
+        const issueContainer = document.getElementById("issueslist");
+        if (!issueContainer) {
+            console.error("Error: Element #issueslist not found in dashboard.html");
+            return;
         }
-    })
-    .catch(error => console.error("Error logging in:", error));
+
+        issueContainer.innerHTML = "";
+        issues.forEach(issue => {
+            issueContainer.innerHTML += `
+                <div class="issue">
+                    <h3>${issue.title}</h3>
+                    <small>Location: ${issue.location}</small>
+                    <p>${issue.description}</p>
+                </div>
+            `;
+        });
+    }
+
+
+// Event Listeners for Forms
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.getElementById("login-form");
+    if (loginForm) {
+        loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            loginUser(username, password);
+        });
+    }
+    
+    const registerForm = document.getElementById("register-form");
+    if (registerForm) {
+        registerForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const username = document.getElementById("reg-username").value;
+            const email = document.getElementById("reg-email").value;
+            const password = document.getElementById("reg-password").value;
+            registerUser(username, email, password);
+        });
+    }
+    
+    const issueForm = document.getElementById("issue-form");
+    if (issueForm) {
+        console.log("Issue form found! Adding event listener...");
+        issueForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            
+            const Title = document.getElementById("Title").value.trim();
+            const Location = document.getElementById("Location").value.trim();
+            const Description = document.getElementById("Description").value.trim();
+
+            console.log("Submitting issue:", { Title, Location, Description });
+
+            if (Title && Location && Description) {
+                createIssue(Title, Location, Description);
+            } else {
+                alert("Please fill in all fields before submitting!");
+            }
+        });
+    } else {
+        console.error("Issue form NOT found! Check form ID in report_issue.html.");
+    }
+
+    if (document.getElementById("issues-list")) {
+        getIssues(); // Load issues when on issues page
+    }
 });
