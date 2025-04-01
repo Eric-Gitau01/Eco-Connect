@@ -43,3 +43,4 @@ TypeError: The view function for 'auth.logout' did not return a valid response. 
 2025-03-28 19:10:19,134 ERROR: 404 Error: http://127.0.0.1:5000/issues [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
 2025-03-28 19:30:40,834 ERROR: 404 Error: http://127.0.0.1:5000/login [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
 2025-03-28 19:30:52,447 ERROR: 404 Error: http://127.0.0.1:5000/login [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
+2025-04-01 10:21:34,801 ERROR: 404 Error: http://127.0.0.1:5000/favicon.ico [in /home/gachuuri/Building/Eco-Connect/app/__init__.py:90]
