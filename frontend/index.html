@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Connect | Community for a Greener Future</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <i class="fas fa-leaf text-3xl text-green-600 mr-2"></i>
+                    <a href="#" class="title-font text-2xl font-bold text-green-800">Eco-Connect</a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-600 font-medium">Home</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-600 font-medium">About</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-600 font-medium">Community</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-green-600 font-medium">Resources</a>
+                    <a href="#" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium transition duration-300">Login / Sign Up</a>
+                </nav>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="hamburger focus:outline-none">
+                        <span class="hamburger-top"></span>
+                        <span class="hamburger-middle"></span>
+                        <span class="hamburger-bottom"></span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div class="md:hidden">
+                <div id="menu" class="hidden absolute flex-col items-center py-8 mt-4 space-y-6 bg-white w-full left-0 right-0 mx-auto shadow-lg">
+                    <a href="#" class="text-gray-700 hover:text-green-600 font-medium">Home</a>
+                    <a href="#" class="text-gray-700 hover:text-green-600 font-medium">About</a>
+                    <a href="#" class="text-gray-700 hover:text-green-600 font-medium">Community</a>
+                    <a href="#" class="text-gray-700 hover:text-green-600 font-medium">Resources</a>
+                    <a href="#" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium">Login / Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section min-h-screen flex items-center justify-center text-white">
+        <div class="container mx-auto px-6 text-center animate-fade-in">
+            <h1 class="title-font text-4xl md:text-6xl font-bold mb-6">Connect with your community for a greener future</h1>
+            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto">Join thousands of eco-conscious individuals working together to make a positive impact on our planet.</p>
+            <a href="#" class="btn-primary inline-block px-8 py-4 rounded-full text-lg font-bold shadow-lg">Join the Movement</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-fade-in">
+                <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">What We Offer</h2>
+                <div class="w-20 h-1 bg-green-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Eco-Connect provides tools and resources to help you make a difference in your community and beyond.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl delay-100">
+                    <div class="text-green-600 text-4xl mb-4">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Community Engagement</h3>
+                    <p class="text-gray-600">Connect with like-minded individuals, join local initiatives, and participate in environmental projects.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl delay-200">
+                    <div class="text-green-600 text-4xl mb-4">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Environmental Awareness</h3>
+                    <p class="text-gray-600">Access educational resources, workshops, and the latest research on sustainability and conservation.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl delay-300">
+                    <div class="text-green-600 text-4xl mb-4">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Collaborative Efforts</h3>
+                    <p class="text-gray-600">Work together on community projects, from tree planting to recycling programs and clean-up events.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card bg-gray-50 p-8 rounded-lg shadow-md hover:shadow-xl">
+                    <div class="text-green-600 text-4xl mb-4">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">User-Friendly Platform</h3>
+                    <p class="text-gray-600">Our intuitive interface makes it easy to find events, connect with others, and track your environmental impact.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="py-20 bg-green-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Community Impact</h2>
+                <div class="w-20 h-1 bg-green-600 mx-auto mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">See how Eco-Connect members are making a difference across the globe.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Stat 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="text-5xl font-bold text-green-600 mb-2">10,000+</div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Active Members</h3>
+                    <p class="text-gray-600">Join our growing community of eco-conscious individuals.</p>
+                </div>
+                
+                <!-- Stat 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="text-5xl font-bold text-green-600 mb-2">500+</div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Community Projects</h3>
+                    <p class="text-gray-600">From urban gardens to beach clean-ups, we're making a difference.</p>
+                </div>
+                
+                <!-- Stat 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-md text-center">
+                    <div class="text-5xl font-bold text-green-600 mb-2">50+</div>
+                    <h3 class="title-font text-xl font-bold text-gray-800 mb-3">Cities Worldwide</h3>
+                    <p class="text-gray-600">Our movement is growing across the globe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="title-font text-3xl md:text-4xl font-bold text-gray-800 mb-4">What Our Members Say</h2>
+                <div class="w-20 h-1 bg-green-600 mx-auto mb-6"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Eco-Connect helped me find local environmental groups I never knew existed. Through the platform, I've participated in tree planting events and made friends who share my passion for sustainability."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah J." class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Sarah J.</h4>
+                            <p class="text-gray-500">Community Volunteer</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-50 p-8 rounded-lg shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-400 text-xl mr-2">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"As a teacher, I've used Eco-Connect to organize environmental education programs for my students. The resources and community support have been invaluable in making sustainability engaging for young minds."</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael T." class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Michael T.</h4>
+                            <p class="text-gray-500">Educator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-green-600 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="title-font text-3xl md:text-4xl font-bold mb-6">Ready to Make a Difference?</h2>
+            <p class="text-xl mb-10 max-w-2xl mx-auto">Join Eco-Connect today and start contributing to a more sustainable future.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="bg-white text-green-600 hover:bg-gray-100 px-8 py-4 rounded-full text-lg font-bold shadow-lg transition duration-300">Sign Up Now</a>
+                <a href="#" class="border-2 border-white hover:bg-green-700 px-8 py-4 rounded-full text-lg font-bold shadow-lg transition duration-300">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white pt-12 pb-6">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <!-- About -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-leaf text-2xl text-green-400 mr-2"></i>
+                        <span class="title-font text-xl font-bold">Eco-Connect</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Connecting communities for environmental action and sustainable living.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-green-400"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-green-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-green-400"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-green-400"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Links -->
+                <div class="grid grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="title-font text-lg font-bold mb-4">Explore</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-green-400">Home</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-green-400">About</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-green-400">Community</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-green-400">Events</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="title-font text-lg font-bold mb-4">Support</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-gray-300 hover:text-green-400">Contact</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-green-400">FAQ</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-green-400">Privacy Policy</a></li>
+                            <li><a href="#" class="text-gray-300 hover:text-green-400">Terms</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h3 class="title-font text-lg font-bold mb-4">Stay Updated</h3>
+                    <p class="text-gray-300 mb-4">Subscribe to our newsletter for the latest updates and events.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Your email" class="px-4 py-2 w-full rounded-l focus:outline-none text-gray-800">
+                        <button type="submit" class="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-r"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-6">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-300 text-sm mb-4 md:mb-0">© 2023 Eco-Connect. All rights reserved.</p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-300 hover:text-green-400 text-sm">Privacy Policy</a>
+                        <a href="#" class="text-gray-300 hover:text-green-400 text-sm">Terms of Service</a>
+                        <a href="#" class="text-gray-300 hover:text-green-400 text-sm">Cookie Policy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
